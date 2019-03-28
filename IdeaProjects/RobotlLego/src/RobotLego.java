@@ -1,11 +1,11 @@
 import lejos.nxt.*;
 
-public class RobotLego{
+public class SeguidorDeLinea{
 
-    static TouchSensor sensorTacto = new TouchSensor(SensorPort.S1);
-    NXTRegulatedMotor motorIzquierdo = Motor.B; //rueda izquierda chequear qué rueda es cuál
-    NXTRegulatedMotor motorDerecho = Motor.C; //rueda derecha
-    LightSensor sensorLuz = new LightSensor(SensorPort.S2);
+    static TouchSensor sensorTacto = new TouchSensor(SensorPort.S2);
+    NXTRegulatedMotor motorDerecho = Motor.B; //rueda derecha
+    NXTRegulatedMotor motorIzquierdo = Motor.C; //rueda izquierda
+    LightSensor sensorLuz = new LightSensor(SensorPort.S1);
 
     public void linea(int distancia){ //avanza rotaciones en ángulos i.e 1 rot = 360
         motorIzquierdo.rotate(distancia, true);
@@ -35,10 +35,13 @@ public class RobotLego{
     }
 
     public int calibrar(){ //le asigna valores a blanco y negro
+		System.out.println("Posicione en blanco para detectar su valor");
         Button.ENTER.waitForPress(); //espera a presionar enter para calibrar
         int  blanco = sensorLuz.readValue();
+		System.out.println("Valor medido para blanco :"+blanco+". Posicione sobre la banda negra para medir su valor");
         Button.ENTER.waitForPress();
         int  negro = sensorLuz.readValue();
+		System.out.println("Valor medido para negro: "+negro);
         return (blanco+negro)/2;
     }
 
@@ -54,9 +57,13 @@ public class RobotLego{
             public void buttonReleased(Button b) {
             }
         });
+		
         Button.ENTER.waitForPress();
         int luz = sensorLuz.readValue();
-        int promedio = calibrar();
+		int promedio = calibrar();
+		//agregar delay
+		System.out.println("Calibración efectuada, promedio: "+promedio+". Presione ENTER para empezar el recorrido.");
+		
         Button.ENTER.waitForPress();
         while (!sensorTacto.isPressed()) { //while el boton no está apretado
             if (luz < promedio) //está más cerca del negro
@@ -85,8 +92,6 @@ public class RobotLego{
 
 
     public static void main(String[] args) {
-        new RobotLego().run();
+        new SeguidorDeLinea().run();
     }
 }
-
-//estoy probando el branching
