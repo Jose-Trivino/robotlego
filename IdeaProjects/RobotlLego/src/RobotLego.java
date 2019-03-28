@@ -20,40 +20,65 @@ public class RobotLego {
         MB.rotate(-angulo,true);
     }
 
-    public void girarEnEjeHastaLinea(){
-
+    public void setearGiro(int valor){ //setear la velocidad de giro en el eje y comienza el movimiento
+        MA.setSpeed(valor);
+        MB.setSpeed(valor);
+        MA.forward();
+        MB.backward();
     }
 
-    public void virarIzquierda(){ //movimiento curvo hacia la izquierda
-        MA.setSpeed(baseSpeed);
-        MB.setSpeed(baseSpeed+delta); //same for delta
-        //¿MB es la rueda derecha?
+    public void virarIzquierda(int angulo){ //movimiento curvo hacia la izquierd
+
+        MB.rotate(angulo); //motor derecho avanza
     }
 
-    public void virarDerecha() { //movimiento curvo hacia la derecha
-        MA.setSpeed(baseSpeed + delta);
-        MB.setSpeed(baseSpeed);
+    public void virarDerecha(int angulo) { //movimiento curvo hacia la derecha
+        MA.rotate(angulo) //motor izquierdo avanza
     }
 
     public int calibrar(){ //le asigna valores a blanco y negro
-        int  blanco = sensorLuz.readValue();
-        girarEnEje(20); //probar el ángulo
+        Button.ENTER.waitForPress();
+        int  blanco = sensorLuz.readValue(); //incluir el uso de botones
+        Button.ENTER.waitForPress();
         int  negro = sensorLuz.readValue();
-        girarEnEje(-20);
         return (blanco+negro)/2;
         //en volá apaña sacar el promedio y decir blanco <=> mayor al promedio, y lo correspondiente al negro
     }
 
     public void run() {
-        calibrar();//detecta valores de blanco y negro (creo que habrá que darles rangos a los movs
-        // porque el negro era como 36-40, quizás un +-10)
+        Button.ENTER.waitForPress();
         int luz = sensorLuz.readValue();
         int promedio = calibrar();
+        Button.ENTER.waitForPress();
         while (!sensorTacto.isPressed()) { //while el boton no está apretado
             if (luz < promedio) //está más cerca del negro
-                virarIzquierda();
+                virarDerecha(60);
             else
-                virarDerecha(); //está hacia lo blanco
+                virarIzquierda(60); //está hacia lo blanco
+
+            if (Button.ESCAPE.isDown()){
+                System.out.println("Goodnight");
+                System.exit(0); //termina el programa
+            }
+            luz = sensorLuz.readValue();
+        } //hasta aqui sigue la linea
+        linea(-40); //retrocede
+        girarEnEje(160);
+        setearGiro(50); //empieza a girar
+        while(luz>promedio){
+            luz=sensorLuz.readValue();
+            if (Button.ESCAPE.isDown()) {
+                System.out.println("Goodnight");
+                System.exit(0); //termina el programa
+            }
+        }
+        MA.stop();
+        MB.stop();
+        while (!sensorTacto.isPressed()) { //while el boton no está apretado
+            if (luz < promedio) //está más cerca del negro
+                virarDerecha(60);
+            else
+                virarIzquierda(60); //está hacia lo blanco
 
             if (Button.ESCAPE.isDown()){
                 System.out.println("Goodnight");
@@ -62,11 +87,9 @@ public class RobotLego {
             luz = sensorLuz.readValue();
         }
 
-        //rotarhastaestarenlalinea();
     }
 
     public static void main (String [] args) {
         new RobotLego().run();
     }
 }
-//quiero ver si se actualiza la volá remota
