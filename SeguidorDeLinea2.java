@@ -7,17 +7,18 @@ public class SeguidorDeLinea2 {
     NXTRegulatedMotor motorDerecho = Motor.B; //rueda derecha
     NXTRegulatedMotor motorIzquierdo = Motor.C; //rueda izquierda
     LightSensor sensorLuz = new LightSensor(SensorPort.S1);
-    int baseSpeed = 50; //velocidad crucero con que avanza el robot
+    int baseSpeed = 0; //velocidad crucero con que avanza el robot
 
-    public void linea(int distancia){ //avanza rotaciones en ángulos i.e 1 rot = 360
-        motorIzquierdo.rotate(distancia, true);
+    /*public void linea(int distancia){ //avanza rotaciones en ángulos i.e 1 rot = 360
+        motorIzquierdo.rotateTo(motorIzquierdo.getTacho()-distancia, true);
         motorDerecho.rotate(distancia);
     }
+	*/
 
-    public void girarEnEje(int angulo){ //gira en su propio eje
-        motorIzquierdo.rotate(angulo, true);
-        motorDerecho.rotate(-angulo,true);
-    }
+    /*public void girarEnEje(int angulo){ //gira en su propio eje
+        motorIzquierdo.rotate(-angulo, true);
+        motorDerecho.rotate(angulo);
+    }*/
 
     public void setearGiro(int valor){ //setear la velocidad de giro en el eje y comienza el movimiento
         motorIzquierdo.setSpeed(valor);
@@ -62,36 +63,35 @@ public class SeguidorDeLinea2 {
 		System.out.println("Presione ENTER para comenzar.");
         Button.ENTER.waitForPress();
         int luz = sensorLuz.readValue();
-		int promedio = calibrar();
+		int promedio = calibrar()+2;
 		//agregar delay
 		System.out.println("Calibracion efectuada, promedio: "+promedio+". Presione ENTER para empezar el recorrido.");
 		
         Button.ENTER.waitForPress();
-		int delta=0;
+		int delta=300;
         while (!sensorTacto.isPressed()) { //while el boton no está apretado
-			delta=25*Math.abs(luz-promedio);
 			motorDerecho.forward();
 			motorIzquierdo.forward();
             if (luz <= promedio) //está más cerca del negro
                 virarDerecha(delta);
-				
+				//hacer la velocidad basevariable cuando la dif es muy chica, pq avanza lento cuando se queda en línea recta final
             else
                 virarIzquierda(delta); //está hacia lo blanco
 			
             luz = sensorLuz.readValue();
         } //hasta aqui sigue la linea
-
-        linea(-40); //retrocede
-        girarEnEje(160);
-        setearGiro(50); //empieza a girar
+		motorIzquierdo.stop();
+        motorDerecho.stop();
+		
+        setearGiro(200); //empieza a girar (no gira porque está en negro ARREGLAR, agregar rotación mínima para encaminarse bien)
 		
         while (luz > promedio) {
             luz = sensorLuz.readValue();           
             motorIzquierdo.stop();
             motorDerecho.stop();
 		}
+		virarDerecha(delta);
 		while (!sensorTacto.isPressed()) { //while el boton no está apretado
-		delta=30*Math.abs(luz-promedio);
 		motorDerecho.forward();
 		motorIzquierdo.forward();
 		if (luz <= promedio) //está más cerca del negro
