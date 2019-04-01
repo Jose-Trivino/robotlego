@@ -15,10 +15,10 @@ public class SeguidorDeLinea2 {
     }
 	*/
 
-    /*public void girarEnEje(int angulo){ //gira en su propio eje
+    public void girarEnEje(int angulo){ //gira en su propio eje
         motorIzquierdo.rotate(-angulo, true);
         motorDerecho.rotate(angulo);
-    }*/
+    }
 
     public void setearGiro(int valor){ //setear la velocidad de giro en el eje y comienza el movimiento
         motorIzquierdo.setSpeed(valor);
@@ -80,15 +80,13 @@ public class SeguidorDeLinea2 {
 
             luz = sensorLuz.readValue();
         } //hasta aqui sigue la linea
-        motorIzquierdo.stop();
-        motorDerecho.stop();
-
-        setearGiro(200); //empieza a girar (no gira porque está en negro ARREGLAR, agregar rotación mínima para encaminarse bien)
+        motorIzquierdo.setSpeed(0);
+        motorDerecho.setSpeed(0); //detiene los motores
+        girarEnEje(180); //para salirse de la banda negra, y poder darse vuelta bien
+        setearGiro(200);
 
         while (luz > promedio) {
             luz = sensorLuz.readValue();
-            motorIzquierdo.stop();
-            motorDerecho.stop();
         }
         virarDerecha(delta);
         while (!sensorTacto.isPressed()) { //while el boton no está apretado
