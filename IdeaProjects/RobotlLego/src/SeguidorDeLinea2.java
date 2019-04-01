@@ -1,4 +1,5 @@
 import lejos.nxt.*;
+import lejos.util.Delay;
 //config ganadora= delta = 300, baseSpeed = 0
 public class SeguidorDeLinea2 {
 
@@ -60,6 +61,7 @@ public class SeguidorDeLinea2 {
             public void buttonReleased(Button b) {
             }
         });
+		
         System.out.println("Presione ENTER para comenzar.");
         Button.ENTER.waitForPress();
         int luz = sensorLuz.readValue();
@@ -80,22 +82,19 @@ public class SeguidorDeLinea2 {
 
             luz = sensorLuz.readValue();
         } //hasta aqui sigue la linea
-        motorIzquierdo.setSpeed(0);
-        motorDerecho.setSpeed(0); //detiene los motores
-        girarEnEje(180); //para salirse de la banda negra, y poder darse vuelta bien
-        setearGiro(200);
-
-        while (luz > promedio) {
-            luz = sensorLuz.readValue();
-        }
-        virarDerecha(delta);
-        while (!sensorTacto.isPressed()) { //while el boton no está apretado
+		motorDerecho.stop();
+		motorIzquierdo.stop();
+		Button.ENTER.waitForPress();
+        girarEnEje(300);
+        virarIzquierda(delta);
+        while (true) { //while el boton no está apretado
             motorDerecho.forward();
             motorIzquierdo.forward();
             if (luz <= promedio) //está más cerca del negro
                 virarDerecha(delta);
             else
                 virarIzquierda(delta); //está hacia lo blanco
+			
             luz = sensorLuz.readValue();
         }
     }
