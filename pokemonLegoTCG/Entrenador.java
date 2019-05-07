@@ -24,6 +24,7 @@ public class Entrenador{
 		return this.activePokemon.getHP()>0;
 	}
 	
-	public boolean emptyTeam(){
-		return this.equipo.length()>
+	public boolean emptyTeam(){ 
+		return this.equipo.length()<1
+	}
 }
