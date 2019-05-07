@@ -11,6 +11,10 @@ public class BattleDriver {
         jugador = player;
     }
 
+    /**
+     * Método que entrega la lista de ataques del Pokemon activo del jugador, en formato de lista.
+     * @return String que lista los ataques.
+     */
     public String displayActivePokemonAttacks(){
         ArrayList<Ataque> lista = this.jugador.getAttacks();
         String display="";
@@ -20,6 +24,10 @@ public class BattleDriver {
         return display;
     }
 
+    public void playerTurn(){
 
+    }
+    public void main(String[] args){ //not sure if it should be here.
 
+    }
 }

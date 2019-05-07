@@ -62,10 +62,9 @@ public class Pokemon{
 	 */
 	public void attack(Pokemon pokemonRival, Ataque ataque){
 		int damage = ataque.getBaseDamage();
-		if(this.getType().equals(pokemonRival.getWeakType()))
-		{
-			damage*=2;
-			}
+		if(this.getType().equals(pokemonRival.getWeakType())) {
+			damage *= 2;
+		}
 
 		else if(this.getType().equals(pokemonRival.getResistantType())){
 			damage=damage-20;
