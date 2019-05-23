@@ -7,6 +7,7 @@ public class BattleDriver {
     public IA oponente;
     public Entrenador jugador;
     public int currentTurn; //0 para ia, 1 para jugador
+    //hay que definir aquí un bufferedStream para recibir los input de texto.
     public BattleDriver(IA opponent, Entrenador player){
         oponente = opponent;
         jugador = player;

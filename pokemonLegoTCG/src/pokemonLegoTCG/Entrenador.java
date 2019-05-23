@@ -72,4 +72,14 @@ public class Entrenador{
 
 		this.activePokemon.attack(entrenador.getActivePokemon(), ataque);
 	}
+
+	public boolean isPokemonDown(){
+		if(this.getActivePokemon().getHP()==0)
+			return true;
+		return false;
+	}
+
+	public void changeDeadpokemon(Pokemon pokemon){
+		this.activePokemon = pokemon;
+	}
 }
