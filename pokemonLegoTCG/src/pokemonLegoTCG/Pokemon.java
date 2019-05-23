@@ -40,7 +40,7 @@ public class Pokemon{
 	}
 	
 	public void setHP(int newHP){
-		this.hp=newHP;
+		this.hp=(newHP>=0)? newHP : 0; //asigna newHP si es que es mayor o igual a 0, 0 en caso contrario.
 	}
 		
 		
@@ -65,7 +65,6 @@ public class Pokemon{
 		if(this.getType().equals(pokemonRival.getWeakType())) {
 			damage *= 2;
 		}
-
 		else if(this.getType().equals(pokemonRival.getResistantType())){
 			damage=damage-20;
 		}

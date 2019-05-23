@@ -1,15 +1,18 @@
 package pokemonLegoTCG;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BattleDriver {
-    public Entrenador oponente;
+    public IA oponente;
     public Entrenador jugador;
-
-    public BattleDriver(Entrenador opponent, Entrenador player){
+    public int currentTurn; //0 para ia, 1 para jugador
+    public BattleDriver(IA opponent, Entrenador player){
         oponente = opponent;
         jugador = player;
     }
+
+
 
     /**
      * Método que entrega la lista de ataques del Pokemon activo del jugador, en formato de lista.
@@ -24,10 +27,22 @@ public class BattleDriver {
         return display;
     }
 
+    public void chooseStarter(){
+        Random random = new Random();
+        currentTurn = random.nextInt(2); //numero random desde 0 hasta 1
+    }
+
+    public void turn(){
+        if(currentTurn==0)
+            this.opponentTurn();
+        else
+            this.playerTurn();
+    }
     public void playerTurn(){
 
     }
-    public void main(String[] args){ //not sure if it should be here.
 
+    public void opponentTurn(){
+        this.oponente.attack(this.jugador);
     }
 }

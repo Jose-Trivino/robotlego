@@ -9,7 +9,10 @@ public class Entrenador{
 	public Entrenador(LinkedList<Pokemon> pokemones){
 		this.equipo = pokemones;
 	}		
-	
+
+	public Entrenador(Pokemon pokemon){
+		this.activePokemon = pokemon;
+	}
 	public LinkedList<Pokemon> getEquipo(){
 		return this.equipo;
 	}
@@ -63,5 +66,10 @@ public class Entrenador{
 	public void changeActivePokemon(Pokemon pokemon){
 		equipo.offer(this.activePokemon);
 		this.activePokemon = pokemon;
+	}
+
+	public void attack(Entrenador entrenador, Ataque ataque){
+
+		this.activePokemon.attack(entrenador.getActivePokemon(), ataque);
 	}
 }
