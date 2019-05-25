@@ -18,6 +18,11 @@ public class IA {
         return this.pokemonActivo;
     }
 
+
+    /**
+     * Eleccion de ataque con probabilidad no necesariamente uniforme uniforme.
+     * @param entrenador Entrenador al que ataque, normalmente al jugador.
+     */
     public void attack(Entrenador entrenador){
         int index;
         Random random = new Random();
@@ -33,6 +38,16 @@ public class IA {
 
         Ataque ataque = this.pokemonActivo.getAttacks().get(index);
         this.pokemonActivo.attack(entrenador.getActivePokemon(),ataque);
+    }
+
+    public Pokemon getActivePokemon(){return this.pokemonActivo;};
+
+    /**
+     * Metodo que chequea si el pokemon activo está caído.
+     * @return True, si ha caído, false en caso contrario.
+     */
+    public Boolean isActivePokemonDown() {
+        return this.pokemonActivo.getHP()==0;
     }
 
 }

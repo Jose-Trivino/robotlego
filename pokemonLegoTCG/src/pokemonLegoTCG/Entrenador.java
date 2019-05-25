@@ -68,9 +68,9 @@ public class Entrenador{
 		this.activePokemon = pokemon;
 	}
 
-	public void attack(Entrenador entrenador, Ataque ataque){
+	public void attack(IA ia, Ataque ataque){
 
-		this.activePokemon.attack(entrenador.getActivePokemon(), ataque);
+		this.activePokemon.attack(ia.getActivePokemon(), ataque);
 	}
 
 	public boolean isPokemonDown(){
