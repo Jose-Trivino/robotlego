@@ -99,7 +99,7 @@ public class BattleDriver {
     public Ataque playerChooseAttack(){
         //display de los ataques
         //eleccion de los ataques
-        int index = ;
+        int index = Integer.parseInt(this.scanner.nextLine()); //recibe un string indice
         Ataque ataque = jugador.selectAttack(index);
         return ataque;
     }

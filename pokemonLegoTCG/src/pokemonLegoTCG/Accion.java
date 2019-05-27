@@ -14,7 +14,7 @@ public class Accion {
             }
 
         else if(nombre.equals("cambiarPokemon")){
-            
+
 
         }
         else {
