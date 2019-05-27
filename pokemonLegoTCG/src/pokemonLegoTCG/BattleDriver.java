@@ -27,8 +27,9 @@ public class BattleDriver {
     public String displayActivePokemonAttacks() {
         ArrayList<Ataque> lista = this.jugador.getAttacks();
         String display = "";
+        int contador =0;
         for (Ataque i : lista) {
-            display += i.getName() + "\n";
+            display +="("+Integer.toString(contador)+")"+ i.getName() + "\n";
         }
         return display;
     }
@@ -69,11 +70,25 @@ public class BattleDriver {
      * Metodo que regula la eleccion de la eleccion del jugador durante su turno.
      * @return Accion elegida
      */
-    public Accion playerChooseAction(){
+    public Accion playerChooseAction() {
         //dar lista de opciones
         //en mpv 3, debe ser estilizado para el ladrillo, con refreshes de la pantalla
-        String nombre = this.scanner.nextLine();
+        int eleccion = Integer.parseInt(this.scanner.nextLine());
         Accion accion;
+        String nombre="";
+        boolean noValido = true;
+        while (noValido)
+            if (eleccion == 1) {
+                nombre = "ataque";
+                noValido = false;
+            } else if (eleccion == 2) {
+                nombre = "cambiarPokemon";
+                noValido = false;
+            } else
+                System.out.print("Incorrecto. Ingrese 1 o 2:");
+                eleccion = Integer.parseInt(this.scanner.nextLine());
+
+
         if(nombre.equals("ataque") || nombre.equals("cambiarPokemon"))
             accion = new Accion(nombre);
         else
@@ -97,7 +112,7 @@ public class BattleDriver {
     }
 
     public Ataque playerChooseAttack(){
-        //display de los ataques
+        //display de los ataques, numerados.
         //eleccion de los ataques
         int index = Integer.parseInt(this.scanner.nextLine()); //recibe un string indice
         Ataque ataque = jugador.selectAttack(index);

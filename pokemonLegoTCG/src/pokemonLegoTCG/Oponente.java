@@ -47,8 +47,17 @@ public class Oponente {
         return this.pokemonActivo.getHP()==0;
     }
 
+
+    /**
+     * Método setter para setear referencias al driver.
+     * @param driver Controlador de la batalla.
+     */
     public void setBattleDriver(BattleDriver driver){
         battleDriver=driver;
+    }
+
+    public void changePokemon(){
+
     }
 
 }
