@@ -2,6 +2,7 @@ package pokemonLegoTCG;
 
 public class Accion {
     String nombre;
+
     public Accion(String name){nombre=name;}
 
     public void isUsed(BattleDriver battleDriver){
@@ -12,7 +13,7 @@ public class Accion {
                 //forma en que battledriver maneja que el pokemon haya muerto
             }
         }
-        else if(){ //distintas acciones a elegir
+        else if(nombre.equals{ //distintas acciones a elegir
 
         }
         else {

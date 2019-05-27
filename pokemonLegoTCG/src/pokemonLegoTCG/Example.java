@@ -8,9 +8,10 @@ public class Example {
         LinkedList<Pokemon> pokemonesEntrenador = null;
         Pokemon pokemon = null;
         Entrenador jugador = new Entrenador(pokemonesEntrenador);
-        IA ia = new IA(pokemon);
+        Oponente oponente = new Oponente(pokemon);
 
-        BattleDriver battleDriver = new BattleDriver(ia,jugador);
+        BattleDriver battleDriver = new BattleDriver(oponente,jugador);
+        battleDriver.setReferences();
         battleDriver.chooseStarter();
         battleDriver.turn();
 

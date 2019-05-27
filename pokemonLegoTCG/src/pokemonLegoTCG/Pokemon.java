@@ -39,8 +39,14 @@ public class Pokemon{
 		return this.resistantType;
 	}
 	
-	public void setHP(int newHP){
-		this.hp=(newHP>=0)? newHP : 0; //asigna newHP si es que es mayor o igual a 0, 0 en caso contrario.
+	public void setHP(int newHP){//asigna newHP si es que es mayor o igual a 0, 0 en caso contrario.
+		if(newHP>=0)
+			this.hp = newHP;
+		else {
+			this.hp = 0;
+			this.battleDriver.playerNotifiesDead();
+		}
+
 	}
 		
 		
@@ -71,6 +77,8 @@ public class Pokemon{
 		pokemonRival.setHP(pokemonRival.getHP()-damage);
 	}
 
-
+	public void setBattleDriver(BattleDriver driver){
+		battleDriver=driver;
+	}
 
 }

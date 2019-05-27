@@ -5,6 +5,7 @@ import java.util.LinkedList;
 public class Entrenador{
 	public LinkedList<Pokemon> equipo; //solo para el jugador, la ia no lo necesita.
 	public Pokemon activePokemon;
+	public BattleDriver battleDriver;
 	
 	public Entrenador(LinkedList<Pokemon> pokemones){
 		this.equipo = pokemones;
@@ -68,9 +69,9 @@ public class Entrenador{
 		this.activePokemon = pokemon;
 	}
 
-	public void attack(IA ia, Ataque ataque){
+	public void attack(Oponente oponente, Ataque ataque){
 
-		this.activePokemon.attack(ia.getActivePokemon(), ataque);
+		this.activePokemon.attack(oponente.getActivePokemon(), ataque);
 	}
 
 	public boolean isPokemonDown(){
@@ -81,5 +82,9 @@ public class Entrenador{
 
 	public void changeDeadpokemon(Pokemon pokemon){
 		this.activePokemon = pokemon;
+	}
+
+	public void setBattleDriver(BattleDriver driver){
+		battleDriver=driver;
 	}
 }

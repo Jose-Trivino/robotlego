@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BattleDriver {
-    public IA oponente;
+    public Oponente oponente;
     public Entrenador jugador;
     public int currentTurn; //0 para ia, 1 para jugador
 
     //hay que definir aquí un bufferedStream para recibir los input de texto.
-    public BattleDriver(IA opponent, Entrenador player) {
+    public BattleDriver(Oponente opponent, Entrenador player) {
         oponente = opponent;
         jugador = player;
     }
@@ -93,5 +93,18 @@ public class BattleDriver {
         int index = 0; //cambiar 0 por metodo de eleccion del ataque.
         Ataque ataque = jugador.selectAttack(index);
         return ataque;
+    }
+
+    public String getTurn(){
+        if(this.currentTurn==0){
+            return "Turno del rival";
+        }
+        else
+            return "Turno del jugador";
+    }
+
+    public void setReferences(){
+        oponente.setBattleDriver(this);
+        jugador.setBattleDriver(this);
     }
 }
