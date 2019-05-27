@@ -27,9 +27,8 @@ public class BattleDriver {
     public String displayActivePokemonAttacks() {
         ArrayList<Ataque> lista = this.jugador.getAttacks();
         String display = "";
-        int contador =0;
         for (Ataque i : lista) {
-            display +="("+Integer.toString(contador)+")"+ i.getName() + "\n";
+            display += i.getName() + "\n";
         }
         return display;
     }
@@ -47,10 +46,16 @@ public class BattleDriver {
      */
     public void turn(){
         if(currentTurn==0) {
+            System.out.print( | 30/60")
+            System.out.print("Pikachu | 30/60")
+            System.out.print("Turno del Oponente")
             this.opponentTurn();
             currentTurn = 1; //le toca al jugador
         }
         else {
+            System.out.print("Turno del Oponente")
+            System.out.print("Pikachu | 30/60")
+            System.out.print("Turno del Jugador")
             this.playerTurn();
             currentTurn = 0; //le toca a la ia
         }
@@ -70,25 +75,14 @@ public class BattleDriver {
      * Metodo que regula la eleccion de la eleccion del jugador durante su turno.
      * @return Accion elegida
      */
-    public Accion playerChooseAction() {
+    public Accion playerChooseAction(){
         //dar lista de opciones
         //en mpv 3, debe ser estilizado para el ladrillo, con refreshes de la pantalla
-        int eleccion = Integer.parseInt(this.scanner.nextLine());
+        System.out.print("Elige tu siguiente acción (1/2)")
+        System.out.print("Atacar")
+        System.out.print("Cambiar Pokémon")
+        String nombre = this.scanner.nextLine();
         Accion accion;
-        String nombre="";
-        boolean noValido = true;
-        while (noValido)
-            if (eleccion == 1) {
-                nombre = "ataque";
-                noValido = false;
-            } else if (eleccion == 2) {
-                nombre = "cambiarPokemon";
-                noValido = false;
-            } else
-                System.out.print("Incorrecto. Ingrese 1 o 2:");
-                eleccion = Integer.parseInt(this.scanner.nextLine());
-
-
         if(nombre.equals("ataque") || nombre.equals("cambiarPokemon"))
             accion = new Accion(nombre);
         else
@@ -112,9 +106,9 @@ public class BattleDriver {
     }
 
     public Ataque playerChooseAttack(){
-        //display de los ataques, numerados.
+        //display de los ataques
         //eleccion de los ataques
-        int index = Integer.parseInt(this.scanner.nextLine()); //recibe un string indice
+        int index = ;
         Ataque ataque = jugador.selectAttack(index);
         return ataque;
     }
@@ -131,4 +125,12 @@ public class BattleDriver {
         oponente.setBattleDriver(this);
         jugador.setBattleDriver(this);
     }
+         
+    public string displayActivePlayer(){
+        
+    }
+                             
+    public string displayActivePlayer(){
+    }
+                             
 }
