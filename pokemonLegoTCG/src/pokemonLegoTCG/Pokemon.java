@@ -38,16 +38,16 @@ public class Pokemon{
 	public String getResistanType(){
 		return this.resistantType;
 	}
+
+	/**
+	 * Metodo que setea el hp del pokemon.
+	 * @param newHP
+	 * @return False si el pokemon queda vivo, true en caso contrario
+	 */
 	
 	public void setHP(int newHP){//asigna newHP si es que es mayor o igual a 0, 0 en caso contrario.
-		if(newHP>=0)
-			this.hp = newHP;
-		else {
-			this.hp = 0;
-			this.battleDriver.playerNotifiesDead();
+		this.hp=(newHP>=0)? newHP : 0;
 		}
-
-	}
 		
 		
 	public ArrayList<Ataque> getAttacks(){
@@ -65,6 +65,7 @@ public class Pokemon{
 	 * Metodo que recibe un ataque del Pokemon que atacará (usar en conjunto con que el entrenador elija un ataque)
 	 * @param pokemonRival
 	 * @param ataque
+	 * @return False si el pokemon queda vivo, true en caso contrario
 	 */
 	public void attack(Pokemon pokemonRival, Ataque ataque){
 		int damage = ataque.getBaseDamage();
@@ -75,10 +76,6 @@ public class Pokemon{
 			damage=damage-20;
 		}
 		pokemonRival.setHP(pokemonRival.getHP()-damage);
-	}
-
-	public void setBattleDriver(BattleDriver driver){
-		battleDriver=driver;
 	}
 
 }

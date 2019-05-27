@@ -5,15 +5,22 @@ import java.util.LinkedList;
 public class Example {
 
     public void run(){
-        LinkedList<Pokemon> pokemonesEntrenador = null;
-        Pokemon pokemon = null;
-        Entrenador jugador = new Entrenador(pokemonesEntrenador);
+        LinkedList<Pokemon> pokemonesJugador = null;
+        Pokemon pokemonActivo = null;
+        LinkedList<Pokemon> pokemonesOponente = null; //ponerle cinco
+        Entrenador jugador = new Entrenador(pokemonesJugador);
         Oponente oponente = new Oponente(pokemon);
 
         BattleDriver battleDriver = new BattleDriver(oponente,jugador);
         battleDriver.setReferences();
+        System.out.println("Bienvenido al simulador de batallas");
+        System.out.println(battleDriver.printDatosOponente());
         battleDriver.chooseStarter();
-        battleDriver.turn();
+        while(algo)
+            battleDriver.turn();
+
+        battleDriver.announceWinner();
+
 
 
 

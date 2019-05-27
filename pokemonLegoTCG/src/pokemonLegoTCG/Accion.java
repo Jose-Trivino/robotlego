@@ -12,8 +12,9 @@ public class Accion {
                 Boolean isActivePokemonDown = battleDriver.oponente.isActivePokemonDown();
                 //forma en que battledriver maneja que el pokemon haya muerto
             }
-        }
-        else if(nombre.equals{ //distintas acciones a elegir
+
+        else if(nombre.equals("cambiarPokemon")){
+            
 
         }
         else {

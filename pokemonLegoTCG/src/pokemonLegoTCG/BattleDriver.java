@@ -2,13 +2,17 @@ package pokemonLegoTCG;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class BattleDriver {
     public Oponente oponente;
     public Entrenador jugador;
     public int currentTurn; //0 para ia, 1 para jugador
+    public Scanner scanner = new Scanner(System.in);
 
-    //hay que definir aquí un bufferedStream para recibir los input de texto.
+    //hay que definir aquí un bufferedStream (input) para recibir los input de texto.
+
+
     public BattleDriver(Oponente opponent, Entrenador player) {
         oponente = opponent;
         jugador = player;
@@ -53,9 +57,6 @@ public class BattleDriver {
     public void playerTurn(){
         Accion accion= this.playerChooseAction();
         accion.isUsed(this);
-        while(!accion.nombre.equals("ataque")) { //infinitas elecciones hasta que se elige atacar
-            accion = this.playerChooseAction();
-            accion.isUsed(this);
         }
 
 
@@ -71,8 +72,16 @@ public class BattleDriver {
     public Accion playerChooseAction(){
         //dar lista de opciones
         //en mpv 3, debe ser estilizado para el ladrillo, con refreshes de la pantalla
-        Accion accion = null;
+        String nombre = this.scanner.nextLine();
+        Accion accion;
+        if(nombre.equals("ataque") || nombre.equals("cambiarPokemon"))
+            accion = new Accion(nombre);
+        else
+
         //eleccion de la accion, por consola ahora, estilizado para el mpv3
+
+        //para imprimir:    System.out.print(texto)
+        //                  System.out.println(texto)
 
         return accion;
     }
@@ -90,7 +99,7 @@ public class BattleDriver {
     public Ataque playerChooseAttack(){
         //display de los ataques
         //eleccion de los ataques
-        int index = 0; //cambiar 0 por metodo de eleccion del ataque.
+        int index = ;
         Ataque ataque = jugador.selectAttack(index);
         return ataque;
     }
